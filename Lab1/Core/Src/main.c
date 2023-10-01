@@ -91,14 +91,34 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
+  enum  state {
+  	  red_on,
+  	  yellow_on,
+    };
 
-    /* USER CODE BEGIN 3 */
+    enum state current = red_on;
+    while (1)
+    {
+      /* USER CODE END WHILE */
+  	  switch(current){
+  	  case red_on:
+  		  HAL_GPIO_WritePin(GPIOA, LED_RED_Pin, RESET);
+  		  HAL_GPIO_WritePin(GPIOA, LED_YELLOW_Pin, SET);
+  		  current = yellow_on;
+  		  break;
+
+  	  case yellow_on:
+  		  HAL_GPIO_WritePin(GPIOA, LED_RED_Pin, SET);
+  		  HAL_GPIO_WritePin(GPIOA, LED_YELLOW_Pin, RESET);
+  		  current = red_on;
+  		  break;
+  	  }
+
+  	  HAL_Delay(2000);
+      /* USER CODE BEGIN 3 */
+    }
+    /* USER CODE END 3 */
   }
-  /* USER CODE END 3 */
-}
 
 /**
   * @brief System Clock Configuration
