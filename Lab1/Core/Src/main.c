@@ -48,6 +48,21 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+void clearAllClock(){
+	HAL_GPIO_WritePin(GPIOA, clock_0_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, clock_1_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, clock_2_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, clock_3_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, clock_4_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, clock_5_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, clock_6_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, clock_7_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, clock_8_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, clock_9_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, clock_10_Pin, SET);
+	HAL_GPIO_WritePin(GPIOA, clock_11_Pin, SET);
+}
+
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
