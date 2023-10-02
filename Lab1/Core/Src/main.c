@@ -115,7 +115,6 @@ void setNumberOnClock(int num){
 		HAL_GPIO_WritePin(GPIOA, clock_11_Pin, RESET);
 		break;
 	}
-
 }
 
 /* USER CODE BEGIN PFP */
