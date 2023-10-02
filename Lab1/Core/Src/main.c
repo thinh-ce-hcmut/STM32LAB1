@@ -187,6 +187,8 @@ void clearNumberOnClock(int num){
   * @brief  The application entry point.
   * @retval int
   */
+
+
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -217,93 +219,58 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int count = 0;
+  enum state{
+	  init,
+	  clock_on,
+  };
+  enum state current = init;
+  int s = 0;
+  int m = 0;
+  int h = 9;
   while (1)
   {
     /* USER CODE END WHILE */
-	  if(count>11)count = 0;
-
-	  switch(count){
-
-	  case 0:
-		  HAL_GPIO_WritePin(GPIOA, clock_0_Pin, RESET);
-		  HAL_GPIO_WritePin(GPIOA, clock_1_Pin|clock_2_Pin|clock_3_Pin
-		                           |clock_4_Pin|clock_5_Pin|clock_6_Pin|clock_7_Pin
-		                           |clock_8_Pin|clock_9_Pin|clock_10_Pin|clock_11_Pin, SET);
+	  switch(current){
+	  case init:
+		  clearAllClock();
+		  current = clock_on;
 		  break;
-	  case 1:
-			  HAL_GPIO_WritePin(GPIOA, clock_1_Pin, RESET);
-			  HAL_GPIO_WritePin(GPIOA, clock_0_Pin|clock_2_Pin|clock_3_Pin
-			                           |clock_4_Pin|clock_5_Pin|clock_6_Pin|clock_7_Pin
-			                           |clock_8_Pin|clock_9_Pin|clock_10_Pin|clock_11_Pin, SET);
-			  break;
-	  case 2:
-			  HAL_GPIO_WritePin(GPIOA, clock_2_Pin, RESET);
-			  HAL_GPIO_WritePin(GPIOA, clock_1_Pin|clock_0_Pin|clock_3_Pin
-			                           |clock_4_Pin|clock_5_Pin|clock_6_Pin|clock_7_Pin
-			                           |clock_8_Pin|clock_9_Pin|clock_10_Pin|clock_11_Pin, SET);
-			  break;
-	  case 3:
-			  HAL_GPIO_WritePin(GPIOA, clock_3_Pin, RESET);
-			  HAL_GPIO_WritePin(GPIOA, clock_1_Pin|clock_2_Pin|clock_0_Pin
-			                           |clock_4_Pin|clock_5_Pin|clock_6_Pin|clock_7_Pin
-			                           |clock_8_Pin|clock_9_Pin|clock_10_Pin|clock_11_Pin, SET);
-			  break;
-	  case 4:
-			  HAL_GPIO_WritePin(GPIOA, clock_4_Pin, RESET);
-			  HAL_GPIO_WritePin(GPIOA, clock_1_Pin|clock_2_Pin|clock_3_Pin
-			                           |clock_0_Pin|clock_5_Pin|clock_6_Pin|clock_7_Pin
-			                           |clock_8_Pin|clock_9_Pin|clock_10_Pin|clock_11_Pin, SET);
-			  break;
-	  case 5:
-			  HAL_GPIO_WritePin(GPIOA, clock_5_Pin, RESET);
-			  HAL_GPIO_WritePin(GPIOA, clock_1_Pin|clock_2_Pin|clock_3_Pin
-			                           |clock_4_Pin|clock_0_Pin|clock_6_Pin|clock_7_Pin
-			                           |clock_8_Pin|clock_9_Pin|clock_10_Pin|clock_11_Pin, SET);
-			  break;
-	  case 6:
-			  HAL_GPIO_WritePin(GPIOA, clock_6_Pin, RESET);
-			  HAL_GPIO_WritePin(GPIOA, clock_1_Pin|clock_2_Pin|clock_3_Pin
-			                           |clock_4_Pin|clock_5_Pin|clock_0_Pin|clock_7_Pin
-			                           |clock_8_Pin|clock_9_Pin|clock_10_Pin|clock_11_Pin, SET);
-			  break;
-	  case 7:
-			  HAL_GPIO_WritePin(GPIOA, clock_7_Pin, RESET);
-			  HAL_GPIO_WritePin(GPIOA, clock_1_Pin|clock_2_Pin|clock_3_Pin
-			                           |clock_4_Pin|clock_5_Pin|clock_6_Pin|clock_0_Pin
-			                           |clock_8_Pin|clock_9_Pin|clock_10_Pin|clock_11_Pin, SET);
-			  break;
-	  case 8:
-			  HAL_GPIO_WritePin(GPIOA, clock_8_Pin, RESET);
-			  HAL_GPIO_WritePin(GPIOA, clock_1_Pin|clock_2_Pin|clock_3_Pin
-			                           |clock_4_Pin|clock_5_Pin|clock_6_Pin|clock_7_Pin
-			                           |clock_0_Pin|clock_9_Pin|clock_10_Pin|clock_11_Pin, SET);
-			  break;
-	  case 9:
-			  HAL_GPIO_WritePin(GPIOA, clock_9_Pin, RESET);
-			  HAL_GPIO_WritePin(GPIOA, clock_1_Pin|clock_2_Pin|clock_3_Pin
-			                           |clock_4_Pin|clock_5_Pin|clock_6_Pin|clock_7_Pin
-			                           |clock_8_Pin|clock_0_Pin|clock_10_Pin|clock_11_Pin, SET);
-			  break;
-	  case 10:
-			  HAL_GPIO_WritePin(GPIOA, clock_10_Pin, RESET);
-			  HAL_GPIO_WritePin(GPIOA, clock_1_Pin|clock_2_Pin|clock_3_Pin
-			                           |clock_4_Pin|clock_5_Pin|clock_6_Pin|clock_7_Pin
-			                           |clock_8_Pin|clock_9_Pin|clock_0_Pin|clock_11_Pin, SET);
-			  break;
-	  case 11:
-			  HAL_GPIO_WritePin(GPIOA, clock_11_Pin, RESET);
-			  HAL_GPIO_WritePin(GPIOA, clock_1_Pin|clock_2_Pin|clock_3_Pin
-			                           |clock_4_Pin|clock_5_Pin|clock_6_Pin|clock_7_Pin
-			                           |clock_8_Pin|clock_9_Pin|clock_10_Pin|clock_0_Pin, SET);
-			  break;
+	  case clock_on:
+		if(s>=60){
+			s=0;
+
+			clearNumberOnClock(m/5);
+			m++;
+			if(m>=60){
+				m=0;
+				clearNumberOnClock(h);
+				h++;
+				if(h>=12){
+					h=0;
+				}
+			}
+		}
+
+		  if (s % 5 == 0)
+			 	 	  {
+			 	 		  if (s / 5 == 0) clearNumberOnClock(11);
+			 	 		  else clearNumberOnClock(s / 5 - 1);
+			 	 		  setNumberOnClock(s / 5);
+			 	 	  }
+
+			 		  s++;
+
+
+			 	  setNumberOnClock(h);
+			 	  setNumberOnClock(m / 5);
+			 	  break;
 	  }
-	  count++;
-	  HAL_Delay(1000);
+
+			  HAL_Delay(10);}
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
-}
+
 
 /**
   * @brief System Clock Configuration
