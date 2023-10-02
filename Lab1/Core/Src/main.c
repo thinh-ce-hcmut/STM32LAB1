@@ -63,6 +63,61 @@ void clearAllClock(){
 	HAL_GPIO_WritePin(GPIOA, clock_11_Pin, SET);
 }
 
+void setNumberOnClock(int num){
+	switch(num){
+
+	case 0:
+	HAL_GPIO_WritePin(GPIOA, clock_0_Pin, RESET);
+	break;
+
+
+	case 1:
+		HAL_GPIO_WritePin(GPIOA, clock_1_Pin, RESET);
+		break;
+
+	case 2:
+		HAL_GPIO_WritePin(GPIOA, clock_2_Pin, RESET);
+		break;
+
+	case 3:
+		HAL_GPIO_WritePin(GPIOA, clock_3_Pin, RESET);
+		break;
+
+	case 4:
+		HAL_GPIO_WritePin(GPIOA, clock_4_Pin, RESET);
+		break;
+
+	case 5:
+		HAL_GPIO_WritePin(GPIOA, clock_5_Pin, RESET);
+		break;
+
+	case 6:
+		HAL_GPIO_WritePin(GPIOA, clock_6_Pin, RESET);
+		break;
+
+	case 7:
+		HAL_GPIO_WritePin(GPIOA, clock_7_Pin, RESET);
+		break;
+
+	case 8:
+		HAL_GPIO_WritePin(GPIOA, clock_8_Pin, RESET);
+		break;
+
+	case 9:
+		HAL_GPIO_WritePin(GPIOA, clock_9_Pin, RESET);
+		break;
+
+	case 10:
+		HAL_GPIO_WritePin(GPIOA, clock_10_Pin, RESET);
+		break;
+
+	case 11:
+		HAL_GPIO_WritePin(GPIOA, clock_11_Pin, RESET);
+		break;
+	}
+
+}
+
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
